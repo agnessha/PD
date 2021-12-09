@@ -1,0 +1,36 @@
+.header {
+  background-color: #cadbe3;
+  padding: 25px 15%;
+  height: 60px;
+}
+
+.imgLogo {
+  display: inline-block;
+  line-height: 85px;
+
+  & img {
+    width: 200px;
+  }
+}
+
+.profileLink {
+  display: inline-block;
+  float: right;
+}
+
+.profileName {
+  background-color: #DCC1AE;
+  text-align: center;
+  border-radius: 33px;
+  font-size: 20px;
+  line-height: 31px;
+  margin-top: 10px;
+  display: inline-block;
+  min-width: 100px;
+}
+.profileImg{
+  display: inline-block;
+  & img{
+    width: 60px;
+  }
+}
