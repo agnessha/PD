@@ -1,0 +1,32 @@
+
+.today{
+  margin-left: 280px;
+  transition: margin-left .25s cubic-bezier(.4,0,.2,1);
+  padding: 40px 20px;
+  height: calc(100vh - 44px);
+  &Bold{
+    font-weight: 500;
+    padding-right: 10px;
+  }
+}
+.today.big{
+  margin-left: 0;
+  transition: margin-left .25s cubic-bezier(.4,0,.2,1);
+
+}
+.todayInner{
+  max-width: 800px;
+  margin: 0 auto;
+  &Date{
+    font-weight: 100;
+    display: inline-block;
+
+  }
+  &Header{
+  }
+}
+.addNote{
+  display: inline-block;
+  right: 0;
+
+}
