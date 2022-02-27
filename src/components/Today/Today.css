@@ -1,8 +1,8 @@
 .today {
   margin-left: 280px;
   transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 40px 20px;
-  height: calc(100vh - 44px);
+  padding: 40px 0;
+  height: calc(100vh);
 }
 .todayBold {
   font-weight: 500;
@@ -22,9 +22,17 @@
   font-weight: 100;
   display: inline-block;
 }
+.todayInnerHeader {
+  padding: 60px 20px 40px;
+}
+
 .addNote {
   display: inline-block;
   right: 0;
+}
+
+.notes {
+  padding: 20px 0;
 }
 
 /*# sourceMappingURL=Today.css.map */

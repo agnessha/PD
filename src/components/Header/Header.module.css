@@ -1,9 +1,11 @@
 .header {
-  background-color: #0D47A1;
+  background-color: #CA6F1E;
   width: 100%;
   align-items: center;
   height: 44px;
+  position: fixed;
   padding: 10px 60px 10px 60px;
+  z-index: 99;
 }
 
 /*# sourceMappingURL=Header.module.css.map */

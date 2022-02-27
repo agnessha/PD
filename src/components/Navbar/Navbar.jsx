@@ -1,30 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import style from './Navbar.module.css'
-import notes from '../../img/notes.png'
-import calendar from '../../img/calendar.png'
-import {NavLink} from "react-router-dom";
+import React from 'react'
+import './Navbar.css'
+import { CalendarIcon } from '@chakra-ui/icons'
+import {today} from '../../jsDate/date'
 
-const Navbar = () => {
+
+const Navbar = (props) => {
+
+
     return (
-        <div className={style.navbarInner}>
-            <div className={style.navbarLink}>
-                <NavLink to='/'>
-                    <img src={notes} alt=""/>
-                    <div className={style.navbarLinkText}>
-                    My notes
+        <div className={props.navbarClass? 'menu' : 'menu' +' '+ 'hiden'}>
+            <div className='menuItems'>
+                <div className='menuItem'>
+                    <div className='calendarIcon'>
+                        {today}
                     </div>
-                </NavLink>
-            </div>
-            <div className={style.navbarLink}>
-                <NavLink to='/calendars'>
-                    <div className={style.navbarLinkImg}>
-                    <img src={calendar} alt=""/>
-                    </div>
-                    <div className={style.navbarLinkText}>
-                    Calendars
-                    </div>
-                </NavLink>
+                    <span>
+                        Today
+                    </span>
+                </div>
+                <div className='menuItem'>
+                    <CalendarIcon w={19} h={19} color={'#6C3483'}/>
+                    <span>
+                        Calendar
+                    </span>
+                </div>
             </div>
         </div>
     )

@@ -2,8 +2,8 @@
 .today{
   margin-left: 280px;
   transition: margin-left .25s cubic-bezier(.4,0,.2,1);
-  padding: 40px 20px;
-  height: calc(100vh - 44px);
+  padding: 40px 0;
+  height: calc(100vh);
   &Bold{
     font-weight: 500;
     padding-right: 10px;
@@ -23,10 +23,15 @@
 
   }
   &Header{
+    padding: 60px 20px 40px;
   }
 }
 .addNote{
   display: inline-block;
   right: 0;
 
+}
+
+.notes{
+  padding: 20px 0;
 }

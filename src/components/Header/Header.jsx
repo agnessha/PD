@@ -1,26 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import style from './Header.module.css'
-import logo from '../../img/Notes.......png'
-import profileImg from '../../img/user.png'
+import React from 'react'
+import s from './Header.module.css'
+import { IconButton } from '@chakra-ui/react'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import {connect} from "react-redux";
+import {changeNavbarClass} from "../../redux/NavbarReducer";
 
-const Header = () => {
+const Header = (props) => {
+    console.log(props.navbarActive)
     return (
-        <div className={style.header}>
-            <div className={style.imgLogo}>
-                <img src={logo} className={style.logo} alt=""/>
-            </div>
-            <div className={style.profileLink}>
-
-                <div className={style.profileImg}>
-                    <img src={profileImg}
-                         className={style.profileImg}
-                         alt=""/>
-                </div>
-
-            </div>
+        <div className={s.header}>
+            <HamburgerIcon w={6} h={6} color='#f5f8ff' cursor='pointer' onClick={() => {
+                props.changeNavbarClass()
+            }}/>
         </div>
     )
 }
 
-export default Header;
+let mapDispatchToProps = (dispatch) => {
+    return {
+        changeNavbarClass: () => {
+            dispatch(changeNavbarClass())
+        }
+    }
+}
+let mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        navbarActive: state.navbar.navbarActive
+    }
+}
+
+const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header)
+
+
+
+export default HeaderContainer;
