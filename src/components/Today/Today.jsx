@@ -3,6 +3,8 @@ import "./Today.css";
 import { connect } from "react-redux";
 import { month, today } from "../../jsDate/date";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
+
 import {
     Modal,
     ModalOverlay,
@@ -81,16 +83,6 @@ const Today = (props) => {
                 const newNotes = localStorage.getItem("notes");
                 const initialValue = JSON.parse(newNotes) || [];
                 setNotes(initialValue);
-                // let changedNotes = [
-                //     currentNote,
-                //         ...filtered,
-                //
-                // ]
-                // console.log(changedNotes)
-                // localStorage.setItem("notes", JSON.stringify(changedNotes));
-                // const newNotes = localStorage.getItem("notes");
-                // const initialValue = JSON.parse(newNotes) || [];
-                // setNotes(initialValue);
             }
         });
     }
@@ -101,6 +93,8 @@ const Today = (props) => {
         });
         console.log(note)
     }
+
+
 
     return (
         <div className={props.navbarClass ? "today" : "today" + " " + "big"}>
@@ -161,21 +155,25 @@ const Today = (props) => {
                         </Flex>
                     </div>
                     <div className="todayInnerNotes">
-                        <Grid templateColumns='repeat(2, 49%)' gap={5}>
-                        {notes.map((n) => {
-                            return (
+                        <ResponsiveMasonry
+                            columnsCountBreakPoints={{350: 1, 750: 2, 900: 2}}
+                        >
+                            <Masonry gutter="15px">
+                                {notes.map((n) => {
+                                return (
                                 <Notes
-                                    completed={n.completed}
-                                    key={n.id}
-                                    noteId={n.id}
-                                    noteText={n.text}
-                                    noteDate={n.date}
-                                    deleteNote={deleteNote}
-                                    noteStatus={noteStatus}
+                                completed={n.completed}
+                                key={n.id}
+                                noteId={n.id}
+                                noteText={n.text}
+                                noteDate={n.date}
+                                deleteNote={deleteNote}
+                                noteStatus={noteStatus}
                                 />
-                            );
-                        })}
-                        </Grid>
+                                );
+                            })}
+                            </Masonry>
+                        </ResponsiveMasonry>
                     </div>
                 </div>
             </Box>

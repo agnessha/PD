@@ -30,7 +30,7 @@ function Notes(props) {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
-        <GridItem >
+        // <GridItem >
         <div className='notes'>
         <Box  borderWidth='1px' borderColor='#ab47bc' borderRadius='lg' overflow='hidden' >
             <Box p='6' bg='#ffffff'>
@@ -50,6 +50,17 @@ function Notes(props) {
                     </Box>
                     <Spacer />
                     <Box>
+
+                            <Checkbox
+                                size='md'
+                                padding='7px 20px'
+                                isChecked={props.completed}
+                                colorScheme='purple'
+                                defaultChecked={props.completed}
+                                onChange={() => {
+                                props.noteStatus(props.noteId);
+                            }}/>
+
                         <DeleteIcon onClick={() => {
                             onOpen();
                         }} cursor='pointer'/>
@@ -84,18 +95,14 @@ function Notes(props) {
                         {props.noteText}
                     </Box>
                     <Spacer />
-                    <Box>
-                        <Checkbox size='md' isChecked={props.completed} colorScheme='purple' defaultChecked={props.completed} onChange={() => {
-                            props.noteStatus(props.noteId);
-                        }}/>
-                    </Box>
+
 
                 </Container>
 
             </Box>
         </Box>
         </div>
-        </GridItem>
+        // </GridItem>
     )
 }
 
