@@ -18,7 +18,10 @@ import {
     Button,
     Text,
     Checkbox,
-    Flex
+    Flex,
+    WrapItem,
+    Container,
+    GridItem
 } from "@chakra-ui/react";
 
 
@@ -27,9 +30,10 @@ function Notes(props) {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
+        <GridItem >
         <div className='notes'>
-        <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' >
-            <Box p='6' bg='#FDEBD0'>
+        <Box  borderWidth='1px' borderColor='#ab47bc' borderRadius='lg' overflow='hidden' >
+            <Box p='6' bg='#ffffff'>
                 <Box display='flex' alignItems='baseline'>
                     <Badge borderRadius='full' px='2' backgroundColor='#D2B4DE'>
                         Today
@@ -75,22 +79,23 @@ function Notes(props) {
                     </Box>
                 </Box>
 
-                <Flex paddingTop='15px'>
+                <Container paddingTop='15px'>
                     <Box>
                         {props.noteText}
                     </Box>
                     <Spacer />
                     <Box>
-                        <Checkbox size='md' colorScheme='green' defaultChecked={props.completed} onChange={() => {
+                        <Checkbox size='md' isChecked={props.completed} colorScheme='purple' defaultChecked={props.completed} onChange={() => {
                             props.noteStatus(props.noteId);
                         }}/>
                     </Box>
 
-                </Flex>
+                </Container>
 
             </Box>
         </Box>
         </div>
+        </GridItem>
     )
 }
 

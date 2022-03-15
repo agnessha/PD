@@ -18,6 +18,8 @@ import {
     useDisclosure,
     Input,
     Box,
+    Wrap, WrapItem,
+    Grid, GridItem,
 } from "@chakra-ui/react";
 import Notes from "./Notes/Notes";
 import { v4 as uuidv4 } from "uuid";
@@ -63,22 +65,32 @@ const Today = (props) => {
     }
 
     function noteStatus(noteId) {
+
+        const index = notes.findIndex((element, index) => {
+            if (element.id === noteId) {
+                return true
+            }
+        })
         notes.map((currentNote) => {
             if (currentNote.id === noteId) {
                 currentNote.completed = !currentNote.completed;
-                const filtered = notes.filter((note) => note.id !== noteId);
-                console.log(filtered)
+                notes[index] = currentNote
+                console.log(notes)
                 console.log(currentNote)
-                let changedNotes = [
-                    currentNote,
-                        ...filtered,
-
-                ]
-                console.log(changedNotes)
-                localStorage.setItem("notes", JSON.stringify(changedNotes));
+                localStorage.setItem("notes", JSON.stringify(notes));
                 const newNotes = localStorage.getItem("notes");
                 const initialValue = JSON.parse(newNotes) || [];
                 setNotes(initialValue);
+                // let changedNotes = [
+                //     currentNote,
+                //         ...filtered,
+                //
+                // ]
+                // console.log(changedNotes)
+                // localStorage.setItem("notes", JSON.stringify(changedNotes));
+                // const newNotes = localStorage.getItem("notes");
+                // const initialValue = JSON.parse(newNotes) || [];
+                // setNotes(initialValue);
             }
         });
     }
@@ -92,7 +104,7 @@ const Today = (props) => {
 
     return (
         <div className={props.navbarClass ? "today" : "today" + " " + "big"}>
-            <Box backgroundColor="#FEF5E7">
+            <Box backgroundColor="#ffffff">
                 <div className="todayInner">
                     <div className="todayInnerHeader">
                         <Flex>
@@ -149,6 +161,7 @@ const Today = (props) => {
                         </Flex>
                     </div>
                     <div className="todayInnerNotes">
+                        <Grid templateColumns='repeat(2, 49%)' gap={5}>
                         {notes.map((n) => {
                             return (
                                 <Notes
@@ -162,6 +175,7 @@ const Today = (props) => {
                                 />
                             );
                         })}
+                        </Grid>
                     </div>
                 </div>
             </Box>

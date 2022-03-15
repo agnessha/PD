@@ -19,7 +19,7 @@ const Navbar = (props) => {
                     </span>
                 </div>
                 <div className='menuItem'>
-                    <CalendarIcon w={19} h={19} color={'#6C3483'}/>
+                    <CalendarIcon w={19} h={19} color={'white'}/>
                     <span>
                         Calendar
                     </span>
