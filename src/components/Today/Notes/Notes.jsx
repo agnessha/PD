@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Today.css'
+import '../../../App.css'
 import {month, today} from "../../../jsDate/date";
 import { StarIcon, DeleteIcon } from '@chakra-ui/icons'
 import {
@@ -26,6 +26,7 @@ import {
 
 
 
+
 function Notes(props) {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -35,8 +36,8 @@ function Notes(props) {
         <Box  borderWidth='1px' borderColor='#ab47bc' borderRadius='lg' overflow='hidden' >
             <Box p='6' bg='#ffffff'>
                 <Box display='flex' alignItems='baseline'>
-                    <Badge borderRadius='full' px='2' backgroundColor='#D2B4DE'>
-                        Today
+                    <Badge borderRadius='full' mr='2' px='2' display={today + ' ' + month === props.noteDate ? 'flex' : 'none'} backgroundColor='#D2B4DE'>
+                        {today + ' ' + month === props.noteDate ? 'Today' : ''}
                     </Badge>
                     <Box
                         color='gray.500'
@@ -44,7 +45,6 @@ function Notes(props) {
                         letterSpacing='wide'
                         fontSize='xs'
                         textTransform='uppercase'
-                        ml='2'
                     >
                         {props.noteDate}
                     </Box>

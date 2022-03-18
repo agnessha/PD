@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-import { extendTheme , ChakraProvider } from '@chakra-ui/react'
-import {AnimatePresence, motion} from 'framer-motion/dist/framer-motion'
+import {  ChakraProvider } from '@chakra-ui/react'
 import {
     BrowserRouter as Router,
     Route, Routes
 } from "react-router-dom";
-import { IconButton } from '@chakra-ui/react'
-import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
 import Header from "./components/Header/Header";
 import {Provider} from "react-redux";
 import store from './redux/store'
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import TodayCon from "./components/Today/Today";
+import CalendarCon from "./components/Calendar/Calendar";
 
 
 
 
 
 const App = () => {
+    console.log(store.getState().navbar.navbarActive)
     return (
         <Provider store={store}>
         <ChakraProvider>
@@ -30,7 +28,10 @@ const App = () => {
                     <NavbarContainer />
                 </div>
                 <div className='AppInner'>
-                    <TodayCon />
+                    <Routes>
+                        <Route path='/' element={<TodayCon/>}/>
+                        <Route path='/calendar' element={<CalendarCon />}/>
+                    </Routes>
                 </div>
             </div>
         </ChakraProvider>

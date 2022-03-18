@@ -1,7 +1,7 @@
 
 .menu{
   background-color: #df78ef;
-  width: 280px;
+  width: 18%;
   padding: 30px 0 30px 0;
   height: calc(100vh - 44px);
   top: 44px;
@@ -11,11 +11,10 @@
   left: 0;
   overflow-x: hidden;
   overflow-y: hidden;
-  text-align: center;
   &Item {
     vertical-align: middle;
     cursor: pointer;
-    padding: 10px 0;
+    padding: 5px 0 5px 11%;
     &:hover{
       background-color: #D287DE;
     }
@@ -29,16 +28,21 @@
   }
 }
 .menu.hiden{
-  left: -280px;
+  left: -18%;
   background-color: #df78ef;
-  width: 280px;
-  padding: 30px 0 30px 53px;
+  width: 18%;
+  padding: 30px 0 30px 0;
   height: calc(100vh - 44px);
   transition: left .25s cubic-bezier(.4,0,.2,1);
   box-sizing: border-box;
   position: fixed;
   overflow-x: hidden;
   overflow-y: hidden;
+  &Item{
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 5px 0 5px 11%;
+  }
 }
 
 .calendarIcon{
@@ -50,4 +54,57 @@
   display: inline-block;
   text-align: center;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .menu{
+    background-color: #df78ef;
+    width: 30%;
+    padding: 30px 0 30px 0;
+    height: calc(100vh - 44px);
+    top: 44px;
+    transition: left .25s cubic-bezier(.4,0,.2,1);
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    &Item {
+      vertical-align: middle;
+      cursor: pointer;
+      padding: 5px 0 5px 11%;
+      &:hover{
+        background-color: #D287DE;
+      }
+      & span{
+        font-size: 17px;
+        padding: 10px;
+        font-weight: 300;
+        vertical-align: middle;
+        color: white;
+      }
+    }
+  }
+  .menu.hiden{
+    left: -30%;
+    background-color: #df78ef;
+    width: 30%;
+    padding: 30px 0 30px 0;
+    height: calc(100vh - 44px);
+    transition: left .25s cubic-bezier(.4,0,.2,1);
+    box-sizing: border-box;
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    &Item{
+      vertical-align: middle;
+      cursor: pointer;
+      padding: 5px 0 5px 11%;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .menu{
+    width: 50%;
+  }
 }

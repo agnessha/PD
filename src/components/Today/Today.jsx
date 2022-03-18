@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./Today.css";
+import "../../App.css";
 import { connect } from "react-redux";
-import { month, today } from "../../jsDate/date";
+import {date, month, today} from "../../jsDate/date";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
@@ -25,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 import Notes from "./Notes/Notes";
 import { v4 as uuidv4 } from "uuid";
+import store from "../../redux/store";
 
 
 
@@ -35,6 +36,7 @@ const Today = (props) => {
         id: uuidv4(),
         date: today + " " + month,
         completed: false,
+        _days: date,
     };
     const [note, setNote] = useState(emptyNote);
     const [notes, setNotes] = useState(() => {
@@ -97,7 +99,7 @@ const Today = (props) => {
 
 
     return (
-        <div className={props.navbarClass ? "today" : "today" + " " + "big"}>
+        <div className={store.getState().navbar.navbarActive ? "today" : "today" + " " + "big"}>
             <Box backgroundColor="#ffffff">
                 <div className="todayInner">
                     <div className="todayInnerHeader">
@@ -156,7 +158,7 @@ const Today = (props) => {
                     </div>
                     <div className="todayInnerNotes">
                         <ResponsiveMasonry
-                            columnsCountBreakPoints={{350: 1, 750: 2, 900: 2}}
+                            columnsCountBreakPoints={{350: 1, 500: 2, 900: 2}}
                         >
                             <Masonry gutter="15px">
                                 {notes.map((n) => {
