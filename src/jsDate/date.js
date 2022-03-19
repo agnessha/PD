@@ -2,13 +2,17 @@
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
-];
+]
 
-export const  date = new Date()
-
-console.log(date)
-export const today = date.getDate();
+export const dateForNote = new Date()
 
 
-export const month = monthNames[date.getMonth()]
+export const today = dateForNote.getDate();
+
+export function setNormalDate(dat) {
+    let res = new Date(dat)
+    return res
+}
+
+export const month = monthNames[dateForNote.getMonth()]
 

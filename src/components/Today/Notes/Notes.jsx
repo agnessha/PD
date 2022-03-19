@@ -27,12 +27,13 @@ import {
 
 
 
-function Notes(props) {
+function Note(props) {
     const { isOpen, onOpen, onClose } = useDisclosure();
+
 
     return (
         // <GridItem >
-        <div className='notes'>
+        <div className='notes' onClick={onOpen}>
         <Box  borderWidth='1px' borderColor='#ab47bc' borderRadius='lg' overflow='hidden' >
             <Box p='6' bg='#ffffff'>
                 <Box display='flex' alignItems='baseline'>
@@ -62,22 +63,38 @@ function Notes(props) {
                             }}/>
 
                         <DeleteIcon onClick={() => {
-                            onOpen();
+                            props.deleteNote(props.noteId)
+
                         }} cursor='pointer'/>
-                        <Modal isOpen={isOpen} onClose={onClose}>
+                        <Modal isOpen={isOpen} onClose={onClose} >
                             <ModalOverlay />
                             <ModalContent>
                                 <ModalCloseButton />
-                                <ModalHeader>Are you sure?</ModalHeader>
+                                <ModalHeader>
+                                    <Flex>
+                                    <Badge borderRadius='full' mr='2' px='2' display={today + ' ' + month === props.noteDate ? 'flex' : 'none'} backgroundColor='#D2B4DE'>
+                                        {today + ' ' + month === props.noteDate ? 'Today' : ''}
+                                    </Badge>
+                                    <Box
+                                        color='gray.500'
+                                        fontWeight='semibold'
+                                        letterSpacing='wide'
+                                        fontSize='xs'
+                                        textTransform='uppercase'
+                                    >
+                                        {props.noteDate}
+                                    </Box>
+                                    </Flex>
+                                </ModalHeader>
 
                                 <ModalBody>
                                     <Text>
-
+                                            {props.noteText}
                                     </Text>
                                 </ModalBody>
 
                                 <ModalFooter>
-                                    <Button colorScheme='blue' mr={3} onClick={() => {
+                                    <Button backgroundColor='#ab47bc'  mr={3} onClick={() => {
                                         props.deleteNote(props.noteId)
                                         onClose();
                                     }}>
@@ -106,4 +123,4 @@ function Notes(props) {
     )
 }
 
-export default Notes;
+export default Note;

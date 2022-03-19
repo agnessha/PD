@@ -16,17 +16,16 @@ import CalendarCon from "./components/Calendar/Calendar";
 
 
 const App = () => {
-    console.log(store.getState().navbar.navbarActive)
     return (
         <Provider store={store}>
         <ChakraProvider>
             <div className="App">
-                <div className='header'>
+                <div>
                     <Header />
                 </div>
-                <div className='navbar'>
-                    <NavbarContainer />
-                </div>
+                {/*<div className='navbar'>*/}
+                {/*    <NavbarContainer />*/}
+                {/*</div>*/}
                 <div className='AppInner'>
                     <Routes>
                         <Route path='/' element={<TodayCon/>}/>

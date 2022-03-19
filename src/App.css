@@ -17,6 +17,16 @@
   height: 100%;
 }
 
+.header {
+  background-color: #790e8b;
+  width: 100%;
+  align-items: center;
+  height: 44px;
+  position: fixed;
+  padding: 8px 60px 10px 45px;
+  z-index: 99;
+}
+
 .today {
   margin-left: 18%;
   transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -67,6 +77,10 @@
     transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
+.notes {
+  cursor: pointer;
+}
+
 .menu {
   background-color: #df78ef;
   width: 18%;

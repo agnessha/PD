@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../App.css";
 import { connect } from "react-redux";
-import {date, month, today} from "../../jsDate/date";
+import { dateForNote, month, today} from "../../jsDate/date";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
@@ -26,6 +26,7 @@ import {
 import Notes from "./Notes/Notes";
 import { v4 as uuidv4 } from "uuid";
 import store from "../../redux/store";
+import Note from "./Notes/Notes";
 
 
 
@@ -36,7 +37,10 @@ const Today = (props) => {
         id: uuidv4(),
         date: today + " " + month,
         completed: false,
-        _days: date,
+        start: new Date(),
+        end: new Date(),
+        color: ''
+
     };
     const [note, setNote] = useState(emptyNote);
     const [notes, setNotes] = useState(() => {
@@ -49,15 +53,17 @@ const Today = (props) => {
 
     function saveNote() {
         let newNotes = [note, ...notes];
-
         localStorage.setItem("notes", JSON.stringify(newNotes));
         setNotes(newNotes);
         createNote("");
     }
 
     function createNote(value) {
-        var newNote = emptyNote;
+        let newNote = emptyNote;
         newNote.text = value;
+        newNote.start = new Date();
+        newNote.end = newNote.start
+        newNote.color = '#ab47bc'
         setNote(newNote);
     }
     function deleteNote(currentId) {
@@ -99,7 +105,7 @@ const Today = (props) => {
 
 
     return (
-        <div className={store.getState().navbar.navbarActive ? "today" : "today" + " " + "big"}>
+        <div className={"today" + " " + "big"}>
             <Box backgroundColor="#ffffff">
                 <div className="todayInner">
                     <div className="todayInnerHeader">
@@ -141,7 +147,7 @@ const Today = (props) => {
                                         <ModalFooter>
                                             <Button
                                                 disabled={warning}
-                                                colorScheme="blue"
+                                                colorScheme="pink"
                                                 mr={3}
                                                 onClick={() => {
                                                     saveNote(warning);
@@ -163,7 +169,7 @@ const Today = (props) => {
                             <Masonry gutter="15px">
                                 {notes.map((n) => {
                                 return (
-                                <Notes
+                                <Note
                                 completed={n.completed}
                                 key={n.id}
                                 noteId={n.id}
