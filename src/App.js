@@ -1,4 +1,4 @@
-import './App.css';
+import '../src/App.css';
 import {  ChakraProvider } from '@chakra-ui/react'
 import {
     BrowserRouter as Router,
@@ -10,6 +10,8 @@ import store from './redux/store'
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import TodayCon from "./components/Today/Today";
 import CalendarCon from "./components/Calendar/Calendar";
+import Basic from "./components/Calendar/Calendar2";
+import DemoApp from "./components/Calendar/Calendar2";
 
 
 
@@ -23,9 +25,6 @@ const App = () => {
                 <div>
                     <Header />
                 </div>
-                {/*<div className='navbar'>*/}
-                {/*    <NavbarContainer />*/}
-                {/*</div>*/}
                 <div className='AppInner'>
                     <Routes>
                         <Route path='/' element={<TodayCon/>}/>

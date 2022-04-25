@@ -6,15 +6,16 @@ import {connect} from "react-redux";
 import {changeNavbarClass} from "../../redux/NavbarReducer";
 import {HeaderNavbar} from "./HeaderNavbar";
 import { Spacer, Box, Flex } from '@chakra-ui/react'
-
+import logo from '../../img/logo.png'
 
 const Header = (props) => {
     return (
         <div className='header'>
             <Flex>
-                <HamburgerIcon w={6} h={6} color='#f5f8ff' cursor='pointer' onClick={() => {
-                    props.changeNavbarClass()
-                }}/>
+                {/*<HamburgerIcon w={6} h={6} color='#f5f8ff' cursor='pointer' onClick={() => {*/}
+                {/*    props.changeNavbarClass()*/}
+                {/*}}/>*/}
+                <img src={logo} alt="" className='logo'/>
                 <Spacer/>
                 <HeaderNavbar/>
             </Flex>
@@ -30,7 +31,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 let mapStateToProps = (state) => {
-    console.log(state)
     return {
         navbarActive: state.navbar.navbarActive
     }

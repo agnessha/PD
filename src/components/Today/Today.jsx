@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../App.css";
 import { connect } from "react-redux";
-import { dateForNote, month, today} from "../../jsDate/date";
+import { calendarDate, dateForNote, month, today} from "../../jsDate/date";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
@@ -27,15 +27,18 @@ import Notes from "./Notes/Notes";
 import { v4 as uuidv4 } from "uuid";
 import store from "../../redux/store";
 import Note from "./Notes/Notes";
+import {TodayDelete} from "./TodayDelete";
 
 
 
 const Today = (props) => {
+    console.log('render')
     const { isOpen, onOpen, onClose } = useDisclosure();
     const emptyNote = {
         text: "",
         id: uuidv4(),
         date: today + " " + month,
+        normalDate: calendarDate,
         completed: false,
         start: new Date(),
         end: new Date(),
@@ -64,6 +67,7 @@ const Today = (props) => {
         newNote.start = new Date();
         newNote.end = newNote.start
         newNote.color = '#ab47bc'
+        newNote.normalDate = calendarDate
         setNote(newNote);
     }
     function deleteNote(currentId) {
@@ -101,6 +105,40 @@ const Today = (props) => {
         });
         console.log(note)
     }
+    function deleteAllNotes() {
+        setNotes([]);
+        localStorage.removeItem("notes");
+    }
+    function updateNote(noteId, newValue) {
+        const index = notes.findIndex((element, index) => {
+            if (element.id === noteId) {
+                return true
+            }
+        })
+        notes.map((currentNote) => {
+            if (currentNote.id === noteId) {
+                currentNote.text = newValue
+                notes[index] = currentNote
+                // let newNote = {
+                //     text: newValue,
+                //     start: currentNote.start,
+                //     color: '#ab47bc',
+                //     id: currentNote.id,
+                //     date: currentNote.date,
+                //     completed: currentNote.completed,
+                //     end: currentNote.end,
+                // }
+                console.log(notes)
+                console.log(currentNote)
+                console.log(newValue)
+                // localStorage.setItem("notes", JSON.stringify(notes));
+                // const newNotes = localStorage.getItem("notes");
+                // const initialValue = JSON.parse(newNotes) || [];
+                // setNotes(initialValue);
+                return true
+            }
+        });
+    }
 
 
 
@@ -116,14 +154,17 @@ const Today = (props) => {
                             </div>
                             <Spacer />
                             <Tooltip label="Delete all notes!">
-                                <DeleteIcon
-                                    margin="6px 15px 4px"
-                                    cursor={"pointer"}
-                                    onClick={() => {
-                                        setNotes([]);
-                                        localStorage.removeItem("notes");
-                                    }}
-                                />
+                                <TodayDelete deleteNotes={deleteAllNotes}>
+
+                                </TodayDelete>
+                                {/*<DeleteIcon*/}
+                                {/*    margin="6px 15px 4px"*/}
+                                {/*    cursor={"pointer"}*/}
+                                {/*    onClick={() => {*/}
+                                {/*        setNotes([]);*/}
+                                {/*        localStorage.removeItem("notes");*/}
+                                {/*    }}*/}
+                                {/*/>*/}
                             </Tooltip>
                             <div className="addNote">
                                 <Tooltip label="Create a new note!">
@@ -177,6 +218,7 @@ const Today = (props) => {
                                 noteDate={n.date}
                                 deleteNote={deleteNote}
                                 noteStatus={noteStatus}
+                                updateNote={updateNote}
                                 />
                                 );
                             })}

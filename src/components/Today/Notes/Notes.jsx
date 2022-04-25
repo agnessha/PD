@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../../../App.css'
 import {month, today} from "../../../jsDate/date";
-import { StarIcon, DeleteIcon } from '@chakra-ui/icons'
+import { StarIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
+
 import {
     Spacer,
     Box,
@@ -21,7 +22,8 @@ import {
     Flex,
     WrapItem,
     Container,
-    GridItem
+    GridItem,
+    Input
 } from "@chakra-ui/react";
 
 
@@ -29,8 +31,15 @@ import {
 
 function Note(props) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-
-
+    const [isEdit, setEdit] = useState(() => {
+        if (isOpen === false) {
+            return false
+        } else {
+            return true
+        }
+    })
+    const [newValue, setNewValue] = useState(props.noteText)
+    console.log(newValue)
     return (
         // <GridItem >
         <div className='notes' onClick={onOpen}>
@@ -58,8 +67,11 @@ function Note(props) {
                                 isChecked={props.completed}
                                 colorScheme='purple'
                                 defaultChecked={props.completed}
+                                onClick={() => {
+                                }}
                                 onChange={() => {
-                                props.noteStatus(props.noteId);
+                                    onClose()
+                                    props.noteStatus(props.noteId);
                             }}/>
 
                         <DeleteIcon onClick={() => {
@@ -88,17 +100,50 @@ function Note(props) {
                                 </ModalHeader>
 
                                 <ModalBody>
-                                    <Text>
+                                    {isEdit ?
+                                        <div onClick={(e) => {
+                                            e.preventDefault();
+                                            let text = e.currentTarget.textContent;
+                                            setNewValue(text)
+                                        }} className='noteInput' contenteditable="true">
+                                            {newValue}
+                                        </div> :
+                                        <Text>
                                             {props.noteText}
-                                    </Text>
+                                        </Text>}
+
+                                    <Box margin='20px 0 5px' cursor='pointer' onClick={() => {
+                                        setEdit(true)
+                                    }}>
+                                        <Flex>
+                                            <EditIcon margin='auto 5px auto 0' w={4} h={4} color="gray.500"/>
+                                            <Text color='gray.500'
+                                                  fontWeight='semibold'
+                                                  letterSpacing='wide'>
+                                                Edit this note
+                                            </Text>
+                                        </Flex>
+                                    </Box>
+                                    <Box margin='5px 0 5px' cursor='pointer' onClick={() => {
+                                        props.deleteNote(props.noteId)
+                                    }}>
+                                        <Flex>
+                                            <DeleteIcon margin='auto 5px auto 0' w={4} h={4} color="gray.500"/>
+                                            <Text color='gray.500'
+                                                  fontWeight='semibold'
+                                                  letterSpacing='wide'>
+                                                Delete this note
+                                            </Text>
+                                        </Flex>
+                                    </Box>
                                 </ModalBody>
 
                                 <ModalFooter>
                                     <Button backgroundColor='#ab47bc'  mr={3} onClick={() => {
-                                        props.deleteNote(props.noteId)
+                                        props.updateNote(props.noteId, newValue)
                                         onClose();
                                     }}>
-                                        Delete
+                                        Save
                                     </Button>
                                     <Button variant='ghost' onClick={onClose}>Cancel</Button>
                                 </ModalFooter>
